@@ -20,6 +20,8 @@ public class NumberListScreen {
         AppMediator mediator = (AppMediator) context.get().getApplication();
         NumberListState state = mediator.getNumberListState();
 
+
+
         NumberListContract.Router router = new NumberListRouter(mediator);
         NumberListContract.Presenter presenter = new NumberListPresenter(state);
         NumberListContract.Model model = new NumberListModel(data);

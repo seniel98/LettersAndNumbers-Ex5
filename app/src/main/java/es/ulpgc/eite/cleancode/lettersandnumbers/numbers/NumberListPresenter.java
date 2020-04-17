@@ -3,6 +3,7 @@ package es.ulpgc.eite.cleancode.lettersandnumbers.numbers;
 import android.util.Log;
 
 import java.lang.ref.WeakReference;
+import java.util.ArrayList;
 import java.util.List;
 
 import es.ulpgc.eite.cleancode.lettersandnumbers.app.LettersToNumbersState;
@@ -37,6 +38,7 @@ public class NumberListPresenter implements NumberListContract.Presenter {
 
             // update the model if is necessary
             model.onDataFromPreviousScreen(savedState.letterData);
+            state.datasource = savedState.letterData.numbers;
 
 
         }
