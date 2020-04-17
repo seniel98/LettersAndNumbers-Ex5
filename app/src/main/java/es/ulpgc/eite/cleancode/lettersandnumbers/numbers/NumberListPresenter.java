@@ -1,6 +1,9 @@
 package es.ulpgc.eite.cleancode.lettersandnumbers.numbers;
 
+import android.util.Log;
+
 import java.lang.ref.WeakReference;
+import java.util.List;
 
 import es.ulpgc.eite.cleancode.lettersandnumbers.app.LettersToNumbersState;
 import es.ulpgc.eite.cleancode.lettersandnumbers.data.NumberData;
@@ -13,6 +16,7 @@ public class NumberListPresenter implements NumberListContract.Presenter {
     private NumberListState state;
     private NumberListContract.Model model;
     private NumberListContract.Router router;
+
 
     public NumberListPresenter(NumberListState state) {
         this.state = state;
@@ -32,7 +36,9 @@ public class NumberListPresenter implements NumberListContract.Presenter {
         if (savedState != null) {
 
             // update the model if is necessary
-            model.onDataFromPreviousScreen(savedState.data);
+            model.onDataFromPreviousScreen(savedState.letterData);
+
+
         }
 
     }
@@ -70,6 +76,7 @@ public class NumberListPresenter implements NumberListContract.Presenter {
     @Override
     public void onBackPressed() {
         // Log.e(TAG, "onBackPressed()");
+
     }
 
     @Override
@@ -89,13 +96,15 @@ public class NumberListPresenter implements NumberListContract.Presenter {
 
     @Override
     public void onClickNumberListButton() {
-        // Log.e(TAG, "onClickNumberListButton()");
-        model.addNumber();
-        NumberData numberData = new NumberData();
+        // Log.e(TAG, "onClickNumberListButton()")
+        state.datasource = model.addNumber();
+        view.get().onDataUpdated(state);
+
+       /* NumberData numberData = new NumberData();
         numberData.number = Integer.parseInt(model.getStoredData());
         state.numberData = numberData;
         state.datasource.add(state.numberData);
-        view.get().onDataUpdated(state);
+        view.get().onDataUpdated(state);*/
     }
 
     @Override
