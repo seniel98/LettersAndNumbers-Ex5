@@ -6,87 +6,97 @@ import android.widget.ListView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 import es.ulpgc.eite.cleancode.lettersandnumbers.R;
 import es.ulpgc.eite.cleancode.lettersandnumbers.data.LetterData;
 
 public class LetterListActivity
-    extends AppCompatActivity implements LetterListContract.View {
+        extends AppCompatActivity implements LetterListContract.View {
 
-  public static String TAG = LetterListActivity.class.getSimpleName();
+    public static String TAG = LetterListActivity.class.getSimpleName();
 
-  private LetterListContract.Presenter presenter;
+    private LetterListContract.Presenter presenter;
 
-  @Override
-  protected void onCreate(Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_letter_list);
-    getSupportActionBar().setTitle(R.string.letters_title);
+    private ListView letterList;
 
-    // do the setup
-    LetterListScreen.configure(this);
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_letter_list);
+        getSupportActionBar().setTitle(R.string.letters_title);
 
-    if (savedInstanceState == null) {
-      presenter.onStart();
+        initLayout();
 
-    } else {
-      presenter.onRestart();
+        // do the setup
+        LetterListScreen.configure(this);
+
+        if (savedInstanceState == null) {
+            presenter.onStart();
+
+        } else {
+            presenter.onRestart();
+        }
     }
-  }
 
-  @Override
-  protected void onResume() {
-    super.onResume();
+    @Override
+    protected void onResume() {
+        super.onResume();
 
-    // load the data
-    presenter.onResume();
-  }
+        // load the data
+        presenter.onResume();
+    }
 
-  @Override
-  public void onBackPressed() {
-    super.onBackPressed();
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
 
-    presenter.onBackPressed();
-  }
+        presenter.onBackPressed();
+    }
 
-  @Override
-  protected void onPause() {
-    super.onPause();
+    @Override
+    protected void onPause() {
+        super.onPause();
 
-    presenter.onPause();
-  }
+        presenter.onPause();
+    }
 
-  @Override
-  protected void onDestroy() {
-    super.onDestroy();
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
 
-    presenter.onDestroy();
-  }
+        presenter.onDestroy();
+    }
 
 
-  public void onClickLetterListButton(View view) {
-    presenter.onClickLetterListButton();
-  }
+    private void initLayout() {
+        letterList = findViewById(R.id.letterList);
+    }
 
-  @Override
-  public void onDataUpdated(LetterListViewModel vm) {
-    //Log.e(TAG, "onDataUpdated()");
+    public void onClickLetterListButton(View view) {
+        presenter.onClickLetterListButton();
+    }
 
-    // deal with the datasource
-    ((ListView) findViewById(R.id.letterList)).setAdapter(
-        new LetterListAdapter(this,vm.datasource,new View.OnClickListener() {
+    @Override
+    public void onDataUpdated(LetterListViewModel vm) {
+        //Log.e(TAG, "onDataUpdated()");
 
-          @Override
-          public void onClick(View view) {
-            LetterData data = (LetterData) view.getTag();
-            presenter.onClickLetterListCell(data);
-          }
-        })
-    );
-  }
+        // deal with the datasource
+        letterList.setAdapter(
+                new LetterListAdapter(this, vm.datasource, new View.OnClickListener() {
 
-  @Override
-  public void injectPresenter(LetterListContract.Presenter presenter) {
-    this.presenter = presenter;
-  }
+                    @Override
+                    public void onClick(View view) {
+                        LetterData data = (LetterData) view.getTag();
+                        presenter.onClickLetterListCell(data);
+                    }
+                })
+        );
+    }
+
+    @Override
+    public void injectPresenter(LetterListContract.Presenter presenter) {
+        this.presenter = presenter;
+    }
 
 }

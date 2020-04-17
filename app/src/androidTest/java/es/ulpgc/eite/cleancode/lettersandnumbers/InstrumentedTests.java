@@ -1,12 +1,6 @@
 package es.ulpgc.eite.cleancode.lettersandnumbers;
 
 
-import android.app.Activity;
-import android.content.Context;
-import android.content.pm.ActivityInfo;
-import android.content.res.Configuration;
-
-import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.filters.LargeTest;
 import androidx.test.rule.ActivityTestRule;
@@ -28,7 +22,7 @@ public class InstrumentedTests { // 18 tests
 
     @Rule
     public ActivityTestRule<LetterListActivity> rule =
-        new ActivityTestRule<>(LetterListActivity.class);
+            new ActivityTestRule<>(LetterListActivity.class);
 
     public InstrumentedRobot robot = new InstrumentedRobot();
 
@@ -296,7 +290,6 @@ public class InstrumentedTests { // 18 tests
         // And mostramos lista de letras con dimension "3"
         robot.mostramosListaDeLetrasConDimensionP1("3");
     }
-
 
 
     @Test

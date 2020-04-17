@@ -8,55 +8,57 @@ import es.ulpgc.eite.cleancode.lettersandnumbers.data.LetterData;
 
 public interface LetterListContract {
 
-  interface View {
-    void injectPresenter(Presenter presenter);
+    interface View {
+        void injectPresenter(Presenter presenter);
 
-    void onDataUpdated(LetterListViewModel viewModel);
-  }
+        void onDataUpdated(LetterListViewModel viewModel);
+    }
 
-  interface Presenter {
-    void injectView(WeakReference<View> view);
+    interface Presenter {
+        void injectView(WeakReference<View> view);
 
-    void injectModel(Model model);
+        void injectModel(Model model);
 
-    void injectRouter(Router router);
+        void injectRouter(Router router);
 
-    void onResume();
+        void onResume();
 
-    void onStart();
+        void onStart();
 
-    void onRestart();
+        void onRestart();
 
-    void onBackPressed();
+        void onBackPressed();
 
-    void onPause();
+        void onPause();
 
-    void onDestroy();
+        void onDestroy();
 
-    void onClickLetterListCell(LetterData data);
+        void onClickLetterListCell(LetterData data);
 
-    void onClickLetterListButton();
-  }
+        void onClickLetterListButton();
+    }
 
-  interface Model {
-    String getStoredData();
+    interface Model {
+        String getStoredData();
 
-    void onDataFromNextScreen(String data);
+        void onDataFromNextScreen(String data);
 
-    void onRestartScreen(String data);
+        void onRestartScreen(String data);
 
-    void onDataFromPreviousScreen(String data);
-  }
+        void onDataFromPreviousScreen(String data);
 
-  interface Router {
-    void navigateToNextScreen();
+        void addLetter();
+    }
 
-    void passStateToNextScreen(LettersToNumbersState state);
+    interface Router {
+        void navigateToNextScreen();
 
-    //LetterListState getStateFromPreviousScreen();
+        void passStateToNextScreen(LettersToNumbersState state);
 
-    NumbersToLettersState getStateFromNextScreen();
+        //LetterListState getStateFromPreviousScreen();
 
-    //void passStateToPreviousScreen(LetterListState state);
-  }
+        NumbersToLettersState getStateFromNextScreen();
+
+        //void passStateToPreviousScreen(LetterListState state);
+    }
 }

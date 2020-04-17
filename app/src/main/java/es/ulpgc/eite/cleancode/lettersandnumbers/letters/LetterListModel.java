@@ -1,35 +1,43 @@
 package es.ulpgc.eite.cleancode.lettersandnumbers.letters;
 
-import android.util.Log;
+import java.util.Random;
 
 public class LetterListModel implements LetterListContract.Model {
 
-  public static String TAG = LetterListModel.class.getSimpleName();
+    public static String TAG = LetterListModel.class.getSimpleName();
 
-  private String data;
+    private String data;
 
-  public LetterListModel(String data) {
-    this.data = data;
-  }
+    final String alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
-  @Override
-  public String getStoredData() {
-    // Log.e(TAG, "getStoredData()");
-    return data;
-  }
+    public LetterListModel(String data) {
+        this.data = data;
+    }
 
-  @Override
-  public void onRestartScreen(String data) {
-    // Log.e(TAG, "onRestartScreen()");
-  }
+    @Override
+    public String getStoredData() {
+        // Log.e(TAG, "getStoredData()");
+        return data;
+    }
 
-  @Override
-  public void onDataFromNextScreen(String data) {
-    // Log.e(TAG, "onDataFromNextScreen()");
-  }
+    @Override
+    public void onRestartScreen(String data) {
+        // Log.e(TAG, "onRestartScreen()");
+    }
 
-  @Override
-  public void onDataFromPreviousScreen(String data) {
-    // Log.e(TAG, "onDataFromPreviousScreen()");
-  }
+    @Override
+    public void onDataFromNextScreen(String data) {
+        // Log.e(TAG, "onDataFromNextScreen()");
+    }
+
+    @Override
+    public void onDataFromPreviousScreen(String data) {
+        // Log.e(TAG, "onDataFromPreviousScreen()");
+    }
+
+    public void addLetter() {
+        Random rnd = new Random();
+        char randomChar = alphabet.charAt(rnd.nextInt(alphabet.length()));
+        data = String.valueOf(randomChar);
+    }
 }

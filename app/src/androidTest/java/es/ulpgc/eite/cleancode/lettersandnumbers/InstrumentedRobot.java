@@ -20,7 +20,7 @@ import static org.hamcrest.Matchers.allOf;
 public class InstrumentedRobot {
 
 
-    private static Matcher<View> withListSize( String str) {
+    private static Matcher<View> withListSize(String str) {
 
         final int size = Integer.valueOf(str);
 
@@ -60,16 +60,15 @@ public class InstrumentedRobot {
             @Override
             public void describeTo(final Description description) {
                 description.appendText(
-                    "ListView should have " + val + " value at position " + pos
+                        "ListView should have " + val + " value at position " + pos
                 );
             }
         };
     }
 
 
-
     public void mostramosListaDeLetrasConDimensionP1(String p1) {
-        onView (withId (R.id.letterList)).check (matches (withListSize (p1)));
+        onView(withId(R.id.letterList)).check(matches(withListSize(p1)));
     }
 
     public void pulsamosBotonDeListaDeLetras() {
@@ -77,19 +76,19 @@ public class InstrumentedRobot {
     }
 
     public void mostramosLetraEnListaEnPosicionP1ConValorP2(String p1, String p2) {
-        onView(withId (R.id.letterList))
-            .check(matches(withValueAtPosition(p2, p1)));
+        onView(withId(R.id.letterList))
+                .check(matches(withValueAtPosition(p2, p1)));
     }
 
     public void pulsamosCeldaDeLetraEnPosicionP1(String p1) {
         onData(allOf())
-            .inAdapterView(withId(R.id.letterList))
-            .atPosition(Integer.valueOf(p1))
-            .perform(click());
+                .inAdapterView(withId(R.id.letterList))
+                .atPosition(Integer.valueOf(p1))
+                .perform(click());
     }
 
     public void mostramosListaDeNumerosConDimensionP1(String p1) {
-        onView (withId (R.id.numberList)).check (matches (withListSize (p1)));
+        onView(withId(R.id.numberList)).check(matches(withListSize(p1)));
     }
 
     public void pulsamosBotonDeListaDeNumeros() {
@@ -97,8 +96,8 @@ public class InstrumentedRobot {
     }
 
     public void mostramosNumeroEnListaEnPosicionP1ConValorP2(String p1, String p2) {
-        onView(withId (R.id.numberList))
-            .check(matches(withValueAtPosition(p2, p1)));
+        onView(withId(R.id.numberList))
+                .check(matches(withValueAtPosition(p2, p1)));
     }
 
     public void pulsamosBackEnListaDeNumeros() {
