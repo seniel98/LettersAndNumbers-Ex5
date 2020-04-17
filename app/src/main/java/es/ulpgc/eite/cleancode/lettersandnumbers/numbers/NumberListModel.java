@@ -1,7 +1,5 @@
 package es.ulpgc.eite.cleancode.lettersandnumbers.numbers;
 
-import java.util.Random;
-
 public class NumberListModel implements NumberListContract.Model {
 
     public static String TAG = NumberListModel.class.getSimpleName();
@@ -35,8 +33,14 @@ public class NumberListModel implements NumberListContract.Model {
 
     @Override
     public void addNumber() {
-        Random rnd = new Random();
-        int number = rnd.nextInt(51);
-        data = String.valueOf(number);
+        if (data.equals("")) {
+            data = String.valueOf(1);
+        } else {
+            int number = Integer.parseInt(data);
+            number++;
+            data = String.valueOf(number);
+        }
+
+
     }
 }
