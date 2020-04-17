@@ -88,7 +88,7 @@ public class LetterListPresenter implements LetterListContract.Presenter {
     public void onClickLetterListCell(LetterData data) {
         // Log.e(TAG, "onClickLetterListCell()");
         LettersToNumbersState lettersToNumbersState = new LettersToNumbersState();
-        lettersToNumbersState.data = data.letter;
+        lettersToNumbersState.letterData = data;
         router.passStateToNextScreen(lettersToNumbersState);
         router.navigateToNextScreen();
 

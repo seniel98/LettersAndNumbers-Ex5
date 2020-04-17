@@ -46,6 +46,8 @@ public interface NumberListContract {
     void onRestartScreen(String data);
 
     void onDataFromPreviousScreen(String data);
+
+      void addNumber();
   }
 
   interface Router {

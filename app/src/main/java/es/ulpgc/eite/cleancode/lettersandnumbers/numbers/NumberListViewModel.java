@@ -7,11 +7,12 @@ import es.ulpgc.eite.cleancode.lettersandnumbers.data.NumberData;
 
 public class NumberListViewModel {
 
-  // put the view state here
-  public String data;
-  public List<NumberData> datasource;
+    // put the view state here
+    public String data;
+    public NumberData numberData;
+    public List<NumberData> datasource;
 
-  public NumberListViewModel() {
-    datasource = new ArrayList<>();
-  }
+    public NumberListViewModel() {
+        datasource = new ArrayList<>();
+    }
 }

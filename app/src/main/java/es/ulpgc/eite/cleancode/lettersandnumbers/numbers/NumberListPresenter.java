@@ -7,47 +7,47 @@ import es.ulpgc.eite.cleancode.lettersandnumbers.data.NumberData;
 
 public class NumberListPresenter implements NumberListContract.Presenter {
 
-  public static String TAG = NumberListPresenter.class.getSimpleName();
+    public static String TAG = NumberListPresenter.class.getSimpleName();
 
-  private WeakReference<NumberListContract.View> view;
-  private NumberListState state;
-  private NumberListContract.Model model;
-  private NumberListContract.Router router;
+    private WeakReference<NumberListContract.View> view;
+    private NumberListState state;
+    private NumberListContract.Model model;
+    private NumberListContract.Router router;
 
-  public NumberListPresenter(NumberListState state) {
-    this.state = state;
-  }
-
-  @Override
-  public void onStart() {
-    // Log.e(TAG, "onStart()");
-
-    // initialize the state if is necessary
-    if (state == null) {
-      state = new NumberListState();
+    public NumberListPresenter(NumberListState state) {
+        this.state = state;
     }
 
-    // use passed state if is necessary
-    LettersToNumbersState savedState = router.getStateFromPreviousScreen();
-    if (savedState != null) {
+    @Override
+    public void onStart() {
+        // Log.e(TAG, "onStart()");
 
-      // update the model if is necessary
-      model.onDataFromPreviousScreen(savedState.data);
+        // initialize the state if is necessary
+        if (state == null) {
+            state = new NumberListState();
+        }
+
+        // use passed state if is necessary
+        LettersToNumbersState savedState = router.getStateFromPreviousScreen();
+        if (savedState != null) {
+
+            // update the model if is necessary
+            model.onDataFromPreviousScreen(savedState.data);
+        }
+
     }
 
-  }
+    @Override
+    public void onRestart() {
+        // Log.e(TAG, "onRestart()");
 
-  @Override
-  public void onRestart() {
-    // Log.e(TAG, "onRestart()");
+        // update the model if is necessary
+        model.onRestartScreen(state.data);
+    }
 
-    // update the model if is necessary
-    model.onRestartScreen(state.data);
-  }
-
-  @Override
-  public void onResume() {
-    // Log.e(TAG, "onResume()");
+    @Override
+    public void onResume() {
+        // Log.e(TAG, "onResume()");
 
     /*
     // use passed state if is necessary
@@ -59,51 +59,57 @@ public class NumberListPresenter implements NumberListContract.Presenter {
     }
     */
 
-    // call the model and update the state
-    state.data = model.getStoredData();
+        // call the model and update the state
+        state.data = model.getStoredData();
 
-    // update the view
-    view.get().onDataUpdated(state);
+        // update the view
+        view.get().onDataUpdated(state);
 
-  }
+    }
 
-  @Override
-  public void onBackPressed() {
-    // Log.e(TAG, "onBackPressed()");
-  }
+    @Override
+    public void onBackPressed() {
+        // Log.e(TAG, "onBackPressed()");
+    }
 
-  @Override
-  public void onPause() {
-    // Log.e(TAG, "onPause()");
-  }
+    @Override
+    public void onPause() {
+        // Log.e(TAG, "onPause()");
+    }
 
-  @Override
-  public void onDestroy() {
-    // Log.e(TAG, "onDestroy()");
-  }
+    @Override
+    public void onDestroy() {
+        // Log.e(TAG, "onDestroy()");
+    }
 
-  @Override
-  public void onClickNumberListCell(NumberData data) {
-    // Log.e(TAG, "onClickNumberListCell()");
-  }
+    @Override
+    public void onClickNumberListCell(NumberData data) {
+        // Log.e(TAG, "onClickNumberListCell()");
+    }
 
-  @Override
-  public void onClickNumberListButton() {
-    // Log.e(TAG, "onClickNumberListButton()");
-  }
+    @Override
+    public void onClickNumberListButton() {
+        // Log.e(TAG, "onClickNumberListButton()");
+        model.addNumber();
+        NumberData numberData = new NumberData();
+        numberData.number = Integer.parseInt(model.getStoredData());
+        state.numberData = numberData;
+        state.datasource.add(state.numberData);
+        view.get().onDataUpdated(state);
+    }
 
-  @Override
-  public void injectView(WeakReference<NumberListContract.View> view) {
-    this.view = view;
-  }
+    @Override
+    public void injectView(WeakReference<NumberListContract.View> view) {
+        this.view = view;
+    }
 
-  @Override
-  public void injectModel(NumberListContract.Model model) {
-    this.model = model;
-  }
+    @Override
+    public void injectModel(NumberListContract.Model model) {
+        this.model = model;
+    }
 
-  @Override
-  public void injectRouter(NumberListContract.Router router) {
-    this.router = router;
-  }
+    @Override
+    public void injectRouter(NumberListContract.Router router) {
+        this.router = router;
+    }
 }

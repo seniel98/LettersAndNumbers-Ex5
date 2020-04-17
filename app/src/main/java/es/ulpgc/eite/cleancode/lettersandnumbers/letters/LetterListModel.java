@@ -1,14 +1,10 @@
 package es.ulpgc.eite.cleancode.lettersandnumbers.letters;
 
-import java.util.Random;
-
 public class LetterListModel implements LetterListContract.Model {
 
     public static String TAG = LetterListModel.class.getSimpleName();
 
     private String data;
-
-    final String alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
     public LetterListModel(String data) {
         this.data = data;
@@ -36,8 +32,19 @@ public class LetterListModel implements LetterListContract.Model {
     }
 
     public void addLetter() {
-        Random rnd = new Random();
-        char randomChar = alphabet.charAt(rnd.nextInt(alphabet.length()));
-        data = String.valueOf(randomChar);
+        switch (data) {
+            case "":
+                data = "A";
+                break;
+            case "A":
+                data = "B";
+                break;
+            case "B":
+                data = "C";
+                break;
+            default:
+                data = "D";
+                break;
+        }
     }
 }
