@@ -1,10 +1,6 @@
 package es.ulpgc.eite.cleancode.lettersandnumbers.numbers;
 
-import android.util.Log;
-
 import java.lang.ref.WeakReference;
-import java.util.ArrayList;
-import java.util.List;
 
 import es.ulpgc.eite.cleancode.lettersandnumbers.app.LettersToNumbersState;
 import es.ulpgc.eite.cleancode.lettersandnumbers.data.NumberData;
